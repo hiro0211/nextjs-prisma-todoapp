@@ -17,7 +17,6 @@ datasource db {
 model Account {
   id                 String    @id @default(cuid())
   userId             String
-  providerType       String
   providerId         String
   providerAccountId  String
   refreshToken       String?
@@ -27,8 +26,9 @@ model Account {
   updatedAt          DateTime  @updatedAt
   user               User      @relation(fields: [userId], references: [id])
 
-  @@unique([providerId, providerAccountId])
+  @@unique([providerId, providerAccountId], name: "providerId_providerAccountId")
 }
+
 
 model Session {
   id           String   @id @default(cuid())
@@ -67,9 +67,10 @@ model VerificationRequest {
 
 model Todo {
   id         String   @id @default(cuid())
-  text       String
+  text       String   @db.VarChar(255) 
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userId     String
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+

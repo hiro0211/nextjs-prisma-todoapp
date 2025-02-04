@@ -2,7 +2,6 @@
 CREATE TABLE "Account" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "providerType" TEXT NOT NULL,
     "providerId" TEXT NOT NULL,
     "providerAccountId" TEXT NOT NULL,
     "refreshToken" TEXT,
@@ -55,7 +54,7 @@ CREATE TABLE "VerificationRequest" (
 -- CreateTable
 CREATE TABLE "Todo" (
     "id" TEXT NOT NULL,
-    "text" TEXT NOT NULL,
+    "text" VARCHAR(255) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
