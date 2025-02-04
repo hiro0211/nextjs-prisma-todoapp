@@ -28,7 +28,7 @@ async function Login() {
                     className="w-6 h-6 mr-2"
                     fill="currentColor"
                   >
-                    <title>{provider.name} icon</title>
+                    <title>Google icon</title>
                     <path
                       fill="#4285F4"
                       d="M24 9.5c3.04 0 5.59 1.06 7.67 2.82l5.6-5.6C33.68 3.07 29.11 1 24 1 14.98 1 7.49 6.93 4.25 14.98l6.7 5.22c1.67-4.99 6.27-8.7 12.05-8.7z"
@@ -46,7 +46,7 @@ async function Login() {
                       d="M24 47c5.95 0 10.94-1.97 14.58-5.35l-7.41-5.73c-2.03 1.37-4.63 2.19-7.17 2.19-5.78 0-10.37-3.71-12.05-8.7l-6.7 5.22C7.49 41.07 14.98 47 24 47z"
                     />
                   </svg>
-                  <span>{provider.name}でログイン</span>
+                  <span>Googleでログイン</span>
                 </Link>
               </div>
             ))}
