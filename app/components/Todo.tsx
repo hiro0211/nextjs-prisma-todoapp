@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const AddTask = () => {
+export const Todo = () => {
   return (
     <div>
       

@@ -7,11 +7,14 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const { text } = await req.json();
+  const { text, userId } = await req.json();
   console.log(text);
+  if (!text || !userId) {
+    return NextResponse.json({ error: "無効なデータ形式です" }, { status: 400 });
+  }
   const todo = await prisma.todo.create({
     data: {
-      text,
+      text, userId
     },
   });
   return NextResponse.json(todo);

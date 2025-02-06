@@ -1,6 +1,5 @@
-import Image from "next/image";
-import AddTask from "./components/AddTask";
-import TodoList from "./components/TodoList";
+import { AddTask } from "./components/AddTask";
+import { TodoList } from "./components/TodoList";
 
 export default async function Home() {
   return (

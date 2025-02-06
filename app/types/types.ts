@@ -1,17 +1,12 @@
-import { type } from "os";
-
-type User ={
+export interface Task {
   id: string;
+  text: string;
+}
+
+export interface User {
+  id: string; // `id` プロパティを明示的に追加
   name: string;
   email: string;
   image: string;
-  todos?: Todo[];
+  todos?: Task[]; // Optional: ユーザーに紐づくTodoリスト
 }
-
-type Todo = {
-  id: string;
-  text: string;
-  createdAt: Date;
-  updatedAt?: Date; 
-  user: User;
-};
