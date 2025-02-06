@@ -1,8 +1,9 @@
-const API_URL = "/api/todo";
+const API_URL = "http:/localhost/api/todo";
 
 // Todoの取得
 export const fetchTodos = async () => {
   const res = await fetch(API_URL);
+  console.log(res);
   if (!res.ok) throw new Error("Failed to fetch todos");
   return res.json();
 };
