@@ -1,18 +1,25 @@
 "use client";
 import React, { useState } from "react";
 import { addTodo } from "../lib/api";
+import { useSession } from "next-auth/react";
 
 export const AddTask = () => {
   const [text, setText] = useState("");
+  const { data: session } = useSession();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) return;
 
+    if (!session?.user?.id) {
+      console.error("ユーザーがログインしていません");
+      return;
+    }
+
     try {
-      await addTodo(text, "test-user"); // 仮の userId
+      await addTodo(text, session.user.id);
       setText("");
-      window.location.reload(); // Todoリストを更新
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }

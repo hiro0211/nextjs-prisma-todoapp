@@ -14,6 +14,11 @@ export const fetchTodos = async () => {
 
 // Todoの追加
 export const addTodo = async (text: string, userId: string) => {
+  if (!text || !userId) {
+    console.error("Invalid parameters:", { text, userId });
+    return;
+  }
+
   try {
     const res = await fetch(API_URL, {
       method: "POST",
@@ -22,13 +27,19 @@ export const addTodo = async (text: string, userId: string) => {
       },
       body: JSON.stringify({ text, userId }),
     });
-    if (!res.ok) throw new Error("Failed to add todo");
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Failed to add todo: ${errorText}`);
+    }
+
     return await res.json();
   } catch (error) {
-    console.error(error);
+    console.error("Error in addTodo:", error);
     throw error;
   }
 };
+
 
 // Todoの更新
 export const updateTodo = async (id: string, text: string) => {
