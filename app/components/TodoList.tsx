@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 
 export const TodoList = () => {
   const [todos, setTodos] = useState<Task[]>([]);
-  const [isEditing, setIsEditing] = useState<string | null>(null); 
-  const [editedTodoText, setEditedTodoText] = useState<string>(""); 
+  const [isEditing, setIsEditing] = useState<string | null>(null);
+  const [editedTodoText, setEditedTodoText] = useState<string>("");
   const ref = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -30,18 +30,20 @@ export const TodoList = () => {
   }, [isEditing]);
 
   const handleEdit = (id: string, text: string) => {
-    setIsEditing(id); 
-    setEditedTodoText(text); 
+    setIsEditing(id);
+    setEditedTodoText(text);
   };
 
   const handleSave = async (id: string) => {
     try {
       await updateTodo(id, editedTodoText);
       setTodos((prev) =>
-        prev.map((todo) => (todo.id === id ? { ...todo, text: editedTodoText } : todo))
+        prev.map((todo) =>
+          todo.id === id ? { ...todo, text: editedTodoText } : todo
+        )
       );
       setIsEditing(null);
-      setEditedTodoText(""); 
+      setEditedTodoText("");
       router.refresh();
     } catch (error) {
       console.error(error);
@@ -58,7 +60,7 @@ export const TodoList = () => {
   };
 
   return (
-    <ul className="mt-4">
+    <ul className="space-y-3">
       {todos.map((todo) => (
         <li
           key={todo.id}

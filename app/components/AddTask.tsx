@@ -11,8 +11,11 @@ export const AddTask = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // テキストが空の場合は何もしない
     if (!text.trim()) return;
 
+    // ログインしていない場合はログインページにリダイレクト
     if (!session?.user?.id) {
       router.push("/api/auth/signin");
       return;
