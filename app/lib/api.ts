@@ -42,14 +42,14 @@ export const addTodo = async (text: string, userId: string) => {
 
 
 // Todoの更新
-export const updateTodo = async (id: string, text: string) => {
+export const updateTodo = async (userId: string, text: string) => {
   try {
     const res = await fetch(API_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, text }),
+      body: JSON.stringify({ text }),
     });
     if (!res.ok) throw new Error("Failed to update todo");
     return await res.json();

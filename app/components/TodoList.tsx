@@ -9,7 +9,7 @@ interface TodoProps {
   todo: Task;
 }
 
-export const TodoList = ({todo}: TodoProps) => {
+export const TodoList = ({ todo }: TodoProps) => {
   const [todos, setTodos] = useState<{ id: string; text: string }[]>([]);
   const ref = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -34,9 +34,9 @@ export const TodoList = ({todo}: TodoProps) => {
     getTodos();
   }, []);
 
-  const handleEdit = async () =>{
+  const handleEdit = async () => {
     setIsEditing(true);
-  }
+  };
 
   const handleDelete = async (id: string) => {
     try {
@@ -60,17 +60,30 @@ export const TodoList = ({todo}: TodoProps) => {
   return (
     <ul className="mt-4">
       {todos.map((todo) => (
-        <li key={todo.id} className="flex justify-between p-2 bg-gray-100 my-2">
-          <span>{todo.text}</span>
-          <div>
+        <li
+          key={todo.id}
+          className="flex justify-between p-4 bg-white border-l-4 border-blue-500 rounded shadow"
+        >
+          {isEditing ? (
+            <input
+              ref={ref}
+              type="text"
+              className="mr-2 px-2 py-1 border rounded focus:outline-none focus:border-blue-400"
+              value={editedTodoText}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEditedTodoText(e.target.value)
+              }
+            />
+          ) : (
+            <span className="text-gray-700">{todo.text}</span>
+          )}
+          <div className="flex space-x-2">
             {isEditing ? (
-              <button>
-                <button
-                  onClick={() => handleSave(todo.id)}
-                  className="text-blue-500 hover:text-blue-700"
-                >
-                  保存
-                </button>
+              <button
+                onClick={() => handleSave(todo.id)}
+                className="text-blue-500 hover:text-blue-700"
+              >
+                保存
               </button>
             ) : (
               <button
@@ -82,7 +95,7 @@ export const TodoList = ({todo}: TodoProps) => {
             )}
             <button
               onClick={() => handleDelete(todo.id)}
-              className="text-red-500"
+              className="text-red-500 hover:text-red-700"
             >
               削除
             </button>
