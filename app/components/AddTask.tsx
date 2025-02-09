@@ -1,10 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { addTodo } from "../lib/api";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export const AddTask = () => {
+interface AddTaskProps {
+  onAdd: (text: string, userId: string) => Promise<void>;
+}
+
+export const AddTask: React.FC<AddTaskProps> = ({ onAdd }) => {
   const [text, setText] = useState("");
   const { data: session } = useSession();
   const router = useRouter();
@@ -22,9 +25,8 @@ export const AddTask = () => {
     }
 
     try {
-      await addTodo(text, session.user.id);
-      setText("");
-      router.refresh();
+      await onAdd(text, session.user.id);
+      setText(""); // 成功したら入力フィールドをクリア
     } catch (error) {
       console.error(error);
     }
